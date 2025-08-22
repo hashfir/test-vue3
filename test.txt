@@ -1,0 +1,95 @@
+GET https://online-test-api.achilles.systems/api/v1/signers
+parameter can be ?name=tes
+Response body
+{
+  "data": [
+    {
+      "id": "bc8ec6c8-09a2-4b48-82e8-11dde07a58ab",
+      "name": "string",
+      "npwp": "123456789012345",
+      "statusTaxpayer": "ACTIVE",
+      "signatory": "TAXPAYER",
+      "defaultSignatory": false
+    },
+    {
+      "id": "639b3e2d-e34c-4f6c-b4df-056ed041f212",
+      "name": "string2",
+      "npwp": "123456789012345",
+      "statusTaxpayer": "ACTIVE",
+      "signatory": "TAXPAYER",
+      "defaultSignatory": true
+    }
+  ]
+}
+response header
+ content-type: application/json 
+ date: Fri,22 Aug 2025 06:17:16 GMT 
+ strict-transport-security: max-age=15724800 
+ vary: Origin,Access-Control-Request-Method,Access-Control-Request-Headers 
+ x-frame-options: SAMEORIGIN
+
+
+ GET https://online-test-api.achilles.systems/api/v1/signers/:id
+ response body 
+ {
+  "data": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "string",
+    "npwp": "string",
+    "statusTaxpayer": "ACTIVE",
+    "signatory": "TAXPAYER",
+    "defaultSignatory": true
+  },
+  "meta": {}
+}
+
+POST https://online-test-api.achilles.systems/api/v1/signers
+{
+  "data": {
+    "name": "string",
+    "npwp": "string",
+    "statusTaxpayer": "ACTIVE, NOT_ACTIVE",
+    "signatory": "TAXPAYER OR AUTHORIZED_REPRESENTATIVE",
+    "defaultSignatory": true
+  }
+}
+
+response 
+{
+  "data": {
+    "id": "f9a718ad-a5b7-4d56-97ef-46329bedc6c8",
+    "name": "string",
+    "npwp": "123456789000000",
+    "statusTaxpayer": "ACTIVE",
+    "signatory": "TAXPAYER",
+    "defaultSignatory": true
+  }
+}
+
+DELETE https://online-test-api.achilles.systems/api/v1/signers/f9a718ad-a5b7-4d56-97ef-46329bedc6c8
+response body
+Successfully deleted.
+
+
+PUT https://online-test-api.achilles.systems/api/v1/signers/f9a718ad-a5b7-4d56-97ef-46329bedc6c8
+ {
+  "data": {
+   "name": "string",
+    "npwp": "123456789000000",
+    "statusTaxpayer": "ACTIVE",
+    "signatory": "TAXPAYER",
+    "defaultSignatory": true
+  }
+}
+response body 
+{
+  "data": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "string",
+    "npwp": "string",
+    "statusTaxpayer": "ACTIVE",
+    "signatory": "TAXPAYER",
+    "defaultSignatory": true
+  },
+  "meta": {}
+}

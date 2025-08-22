@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NotificationContainer > should remove notification when close button is clicked 1`] = `
+"<div data-v-8470eda0="" class="notification-container">
+  <transition-group-stub data-v-8470eda0="" name="notification" tag="div" appear="false" persisted="false" css="true"></transition-group-stub>
+</div>"
+`;
+
+exports[`NotificationContainer > should render empty when no notifications 1`] = `
+"<div data-v-8470eda0="" class="notification-container">
+  <transition-group-stub data-v-8470eda0="" name="notification" tag="div" appear="false" persisted="false" css="true"></transition-group-stub>
+</div>"
+`;
+
+exports[`NotificationContainer > should render error notification 1`] = `
+"<div data-v-8470eda0="" class="notification-container">
+  <transition-group-stub data-v-8470eda0="" name="notification" tag="div" appear="false" persisted="false" css="true">
+    <div data-v-8470eda0="" class="notification notification--error">
+      <div data-v-8470eda0="" class="notification__content">Test error message</div><button data-v-8470eda0="" class="notification__close"> × </button>
+    </div>
+  </transition-group-stub>
+</div>"
+`;
+
+exports[`NotificationContainer > should render multiple notifications 1`] = `
+"<div data-v-8470eda0="" class="notification-container">
+  <transition-group-stub data-v-8470eda0="" name="notification" tag="div" appear="false" persisted="false" css="true">
+    <div data-v-8470eda0="" class="notification notification--success">
+      <div data-v-8470eda0="" class="notification__content">Success message</div><button data-v-8470eda0="" class="notification__close"> × </button>
+    </div>
+    <div data-v-8470eda0="" class="notification notification--error">
+      <div data-v-8470eda0="" class="notification__content">Error message</div><button data-v-8470eda0="" class="notification__close"> × </button>
+    </div>
+    <div data-v-8470eda0="" class="notification notification--warning">
+      <div data-v-8470eda0="" class="notification__content">Warning message</div><button data-v-8470eda0="" class="notification__close"> × </button>
+    </div>
+  </transition-group-stub>
+</div>"
+`;
+
+exports[`NotificationContainer > should render success notification 1`] = `
+"<div data-v-8470eda0="" class="notification-container">
+  <transition-group-stub data-v-8470eda0="" name="notification" tag="div" appear="false" persisted="false" css="true">
+    <div data-v-8470eda0="" class="notification notification--success">
+      <div data-v-8470eda0="" class="notification__content">Test success message</div><button data-v-8470eda0="" class="notification__close"> × </button>
+    </div>
+  </transition-group-stub>
+</div>"
+`;
