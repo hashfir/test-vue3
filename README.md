@@ -33,8 +33,7 @@ src/
 ├── views/
 │   └── SignersList.vue     # Main page with the table
 ├── services/
-│   ├── api.js             # All API calls
-│   └── mockApi.js         # For testing when API is down
+│   └── api.js             # All API calls
 ├── utils/
 │   └── npwp.js           # NPWP formatting functions
 └── composables/
