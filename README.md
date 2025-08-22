@@ -1,184 +1,102 @@
-# OnlinePajak SPT Signers Management System
+# SPT Signers Management App
 
-A Vue 3 web application for managing SPT (Surat Pemberitahuan Tahunan) signers data with full CRUD functionality.
+Hey there! This is a Vue.js app I built for managing SPT (tax return) signers. It was part of a coding challenge for OnlinePajak, and honestly, it turned out pretty decent!
 
-## Features
+## What does this app do?
 
-✅ **Vue 3 with Composition API** - Modern Vue.js development approach
-✅ **Complete CRUD Operations** - Create, Read, Update, Delete signers
-✅ **Form Validation** - All fields are required with proper validation
-✅ **NPWP Formatting** - Display NPWP with separators (XX.XXX.XXX.X-XXX.XXX), store without separators
-✅ **Success/Error Notifications** - User-friendly feedback system
-✅ **Snapshot Tests** - Comprehensive test coverage
-✅ **Clean Architecture** - Single Responsibility Principle and clean code practices
-✅ **Responsive Design** - Works on desktop and mobile devices
+Basically, you can manage a list of people who are authorized to sign tax documents. You can:
+- See all signers in a nice table
+- Add new signers using a popup form
+- Edit existing signers (also in a popup)
+- Delete signers you don't need anymore
+- Format NPWP numbers properly (Indonesian tax ID format)
 
-## Requirements Met
+The whole thing uses modals instead of separate pages, which I think makes it feel more modern and user-friendly.
 
-1. ✅ Vue 3 with Composition API
-2. ✅ Form validation with all required fields
-3. ✅ NPWP formatting (display with separators, store without)
-4. ✅ Success/error notifications
-5. ✅ Snapshot tests implemented
-6. ✅ Clean, well-structured project following SRP
+## Tech Stack
+
+- **Vue 3** with Composition API (took me a while to get used to this after Vue 2!)
+- **Vue Router** for navigation (though we only have one main route now)
+- **Axios** for API calls
+- **Vite** for the build process (so much faster than webpack!)
 
 ## Project Structure
 
+I tried to keep things organized. Here's how I structured it:
+
 ```
 src/
-├── components/
-│   ├── NotificationContainer.vue    # Global notification system
-│   └── __tests__/
-│       └── NotificationContainer.test.js
-├── composables/
-│   └── useNotifications.js          # Notification state management
-├── router/
-│   └── index.js                     # Vue Router configuration
-├── services/
-│   ├── api.js                       # API service with real/mock toggle
-│   └── mockApi.js                   # Mock API for development/testing
-├── utils/
-│   ├── npwp.js                      # NPWP formatting utilities
-│   └── __tests__/
-│       └── npwp.test.js
+├── components/          # Reusable components
+│   ├── Modal.vue           # Generic modal wrapper
+│   ├── SignerForm.vue      # The form used for both create/edit
+│   └── NotificationContainer.vue  # Toast notifications
 ├── views/
-│   ├── SignersList.vue              # List all signers
-│   ├── CreateSigner.vue             # Add new signer
-│   └── UpdateSigner.vue             # Edit existing signer
-├── App.vue                          # Main application component
-└── main.js                          # Application entry point
+│   └── SignersList.vue     # Main page with the table
+├── services/
+│   ├── api.js             # All API calls
+│   └── mockApi.js         # For testing when API is down
+├── utils/
+│   └── npwp.js           # NPWP formatting functions
+└── composables/
+    └── useNotifications.js # Notification state management
 ```
 
-## Pages
+## Features I'm proud of
 
-### 1. **Signers List Page** (`/`)
-- Displays all signers in a table format
-- Shows ID, Name, NPWP (formatted), Email, Phone
-- Edit and Delete actions for each signer
-- Add New Signer button
+### NPWP Formatting
+The NPWP input automatically formats as you type (like `12.345.678.9-012.345`) but stores the clean version in the database. Had to write some regex for this - always fun debugging those! 😅
 
-### 2. **Create Signer Modal**
-- Modal popup with form to add new signer
-- All fields are required and validated
-- NPWP input with automatic formatting
-- Success notification on creation
-- Accessible via "Add New Signer" button
+### Modal Forms
+Instead of navigating to different pages, everything happens in modals. Much cleaner UX in my opinion. The modal closes automatically when you submit successfully.
 
-### 3. **Update Signer Modal**
-- Modal popup with pre-filled form for existing signer data
-- Same validation rules as create form
-- Success notification on update
-- Accessible via "Edit" button in each signer row
+### Form Validation
+All fields are required and properly validated. The NPWP field specifically checks for exactly 15 digits.
 
-## Form Fields
-
-All forms include the following required fields:
-- **Name** - Signer's full name
-- **NPWP** - Tax identification number (15 digits)
-- **Taxpayer Status** - ACTIVE or NOT_ACTIVE
-- **Signatory Type** - TAXPAYER or AUTHORIZED_REPRESENTATIVE
-- **Default Signatory** - Boolean flag to set as default signer
-
-## NPWP Formatting
-
-The application handles NPWP formatting according to Indonesian tax requirements:
-- **Display Format**: `XX.XXX.XXX.X-XXX.XXX` (with separators)
-- **Storage Format**: `XXXXXXXXXXXXXXX` (15 digits without separators)
-- **Validation**: Must be exactly 15 digits
+### Real-time Notifications
+Added toast notifications for success/error states. They auto-dismiss after a few seconds, and you can close them manually.
 
 ## API Integration
 
-The application is integrated with the real API at `https://online-test-api.achilles.systems/api/v1/signers`.
+The app connects to `https://online-test-api.achilles.systems/api/v1/signers`. I also built a mock API service for local development in case the real API is down.
 
-### API Endpoints
-
-- `GET /api/v1/signers` - Get all signers (supports ?name=filter parameter)
-- `GET /api/v1/signers/:id` - Get signer by ID
-- `POST /api/v1/signers` - Create new signer
-- `PUT /api/v1/signers/:id` - Update signer
-- `DELETE /api/v1/signers/:id` - Delete signer
-
-### API Data Structure
-
-**Signer Object:**
+Expected data structure:
 ```json
 {
-  "id": "uuid",
-  "name": "string",
-  "npwp": "15-digit-string",
-  "statusTaxpayer": "ACTIVE|NOT_ACTIVE",
-  "signatory": "TAXPAYER|AUTHORIZED_REPRESENTATIVE",
-  "defaultSignatory": boolean
+  "id": "some-uuid",
+  "name": "Nama",
+  "npwp": "123451789012345",
+  "statusTaxpayer": "ACTIVE",
+  "signatory": "TAXPAYER",
+  "defaultSignatory": false
 }
 ```
 
-**Request/Response Format:**
-- POST/PUT requests: `{"data": {...signerObject}}`
-- GET responses: `{"data": [signerObject]}`
-- Single GET response: `{"data": signerObject, "meta": {}}`
+## Running the Project
 
-## Installation & Setup
+Pretty standard Vue setup:
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd online-pajak-vue-test
-
 # Install dependencies
 npm install
 
-# Start development server
+# Start dev server
 npm run dev
 
 # Run tests
 npm run test
 
-# Run tests once
-npm run test:run
-
 # Build for production
 npm run build
 ```
 
-## Development Server
-
-The application runs on `http://localhost:5174` (or next available port).
+The dev server usually runs on `http://localhost:5174`.
 
 ## Testing
 
-The project includes comprehensive tests:
+I set up some basic tests using Vitest:
+- Unit tests for NPWP utility functions
+- Component tests for the notification system
+- Snapshot tests to catch UI regressions
 
-- **Unit Tests**: NPWP utility functions
-- **Component Tests**: NotificationContainer component
-- **Snapshot Tests**: UI consistency testing
+Run `npm run test` to see them in action.
 
-Run tests with:
-```bash
-npm run test        # Watch mode
-npm run test:run    # Single run
-```
-
-## Technologies Used
-
-- **Vue 3** - Progressive JavaScript framework
-- **Vue Router 4** - Client-side routing
-- **Axios** - HTTP client for API calls
-- **Vite** - Build tool and dev server
-- **Vitest** - Testing framework
-- **Vue Test Utils** - Vue component testing utilities
-
-## Browser Support
-
-The application supports all modern browsers that support ES6+ features.
-
-## License
-
-This project is developed as a coding challenge for OnlinePajak.
-
-## Notes
-
-- The application uses mock data for development/testing purposes
-- Real API integration can be enabled by changing the configuration in `src/services/api.js`
-- All form validations are client-side; server-side validation should be implemented in production
-- The application follows Vue 3 Composition API best practices
-- Responsive design ensures compatibility across different screen sizes

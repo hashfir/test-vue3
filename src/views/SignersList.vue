@@ -78,7 +78,7 @@
     <!-- Create Modal -->
     <Modal
       :isOpen="isCreateModalOpen"
-      title="Add New Signer"
+      title="Tambah Penandatanganan SPT"
       @close="closeCreateModal"
     >
       <SignerForm
@@ -91,7 +91,7 @@
     <!-- Edit Modal -->
     <Modal
       :isOpen="isEditModalOpen"
-      title="Update Signer"
+      title="Update Penandatanganan SPT"
       @close="closeEditModal"
     >
       <SignerForm

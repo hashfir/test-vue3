@@ -1,19 +1,9 @@
 <template>
   <form @submit.prevent="handleSubmit" class="signer-form">
     <div class="form-group">
-      <label for="name" class="form-label">Name *</label>
-      <input
-        id="name"
-        v-model="form.name"
-        type="text"
-        class="form-input"
-        :class="{ 'form-input--error': errors.name }"
-        placeholder="Enter signer name"
-      />
-      <div v-if="errors.name" class="form-error">{{ errors.name }}</div>
+      <label for="name" class="form-label">*Field Wajib Diisi</label>
     </div>
-
-    <div class="form-group">
+        <div class="form-group">
       <label for="npwp" class="form-label">NPWP *</label>
       <input
         id="npwp"
@@ -26,36 +16,69 @@
         @input="handleNpwpInput"
       />
       <div v-if="errors.npwp" class="form-error">{{ errors.npwp }}</div>
-      <div class="form-help">NPWP should be 15 digits</div>
+      <div class="form-help">NPWP harus 15 digits</div>
     </div>
 
     <div class="form-group">
-      <label for="statusTaxpayer" class="form-label">Taxpayer Status *</label>
-      <select
-        id="statusTaxpayer"
-        v-model="form.statusTaxpayer"
+      <label for="name" class="form-label">Nama *</label>
+      <input
+        id="name"
+        v-model="form.name"
+        type="text"
         class="form-input"
-        :class="{ 'form-input--error': errors.statusTaxpayer }"
-      >
-        <option value="">Select status</option>
-        <option value="ACTIVE">Active</option>
-        <option value="NOT_ACTIVE">Not Active</option>
-      </select>
+        :class="{ 'form-input--error': errors.name }"
+        placeholder="Nama Penandatanganan SPT"
+      />
+      <div v-if="errors.name" class="form-error">{{ errors.name }}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Status Wajib Pajak*</label>
+      <div class="radio-group" :class="{ 'radio-group--error': errors.statusTaxpayer }">
+        <label class="radio-label">
+          <input
+            type="radio"
+            v-model="form.statusTaxpayer"
+            value="ACTIVE"
+            class="radio-input"
+          />
+          <span class="radio-text">Aktif</span>
+        </label>
+        <label class="radio-label">
+          <input
+            type="radio"
+            v-model="form.statusTaxpayer"
+            value="NOT_ACTIVE"
+            class="radio-input"
+          />
+          <span class="radio-text">Tidak Aktif</span>
+        </label>
+      </div>
       <div v-if="errors.statusTaxpayer" class="form-error">{{ errors.statusTaxpayer }}</div>
     </div>
 
     <div class="form-group">
-      <label for="signatory" class="form-label">Signatory Type *</label>
-      <select
-        id="signatory"
-        v-model="form.signatory"
-        class="form-input"
-        :class="{ 'form-input--error': errors.signatory }"
-      >
-        <option value="">Select signatory type</option>
-        <option value="TAXPAYER">Taxpayer</option>
-        <option value="AUTHORIZED_REPRESENTATIVE">Authorized Representative</option>
-      </select>
+      <label class="form-label">bertindak sebagai *</label>
+      <div class="radio-group" :class="{ 'radio-group--error': errors.signatory }">
+        <label class="radio-label">
+          <input
+            type="radio"
+            v-model="form.signatory"
+            value="TAXPAYER"
+            class="radio-input"
+          />
+          <span class="radio-text">Wajib Pajak</span>
+        </label>
+        <label class="radio-label">
+          <input
+            type="radio"
+            v-model="form.signatory"
+            value="AUTHORIZED_REPRESENTATIVE"
+            class="radio-input"
+          />
+          <span class="radio-text">Kuasa</span>
+        </label>
+      </div>
       <div v-if="errors.signatory" class="form-error">{{ errors.signatory }}</div>
     </div>
 
@@ -66,7 +89,7 @@
           v-model="form.defaultSignatory"
           class="form-checkbox"
         />
-        <span class="form-checkbox-text">Set as default signatory</span>
+        <span class="form-checkbox-text">Jadikan Sebagai Default</span>
       </label>
     </div>
 
@@ -223,6 +246,7 @@ watch(() => props.isEdit, (isEdit) => {
   margin-bottom: 6px;
   font-weight: 500;
   color: #374151;
+  text-align: left;
 }
 
 .form-input,
@@ -309,6 +333,37 @@ watch(() => props.isEdit, (isEdit) => {
   cursor: pointer;
   font-weight: 500;
   color: #374151;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.radio-group--error {
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 400;
+  color: #374151;
+}
+
+.radio-input {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+}
+
+.radio-text {
+  user-select: none;
 }
 
 .form-checkbox {
