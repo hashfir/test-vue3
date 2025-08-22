@@ -43,7 +43,7 @@ src/
 ## Features I'm proud of
 
 ### NPWP Formatting
-The NPWP input automatically formats as you type (like `12.345.678.9-012.345`) but stores the clean version in the database. Had to write some regex for this - always fun debugging those! 😅
+The NPWP input automatically formats as you type (like `12.345.678.9-012.345`) but stores the clean version in the database. Had to write some regex for this 
 
 ### Modal Forms
 Instead of navigating to different pages, everything happens in modals. Much cleaner UX in my opinion. The modal closes automatically when you submit successfully.
