@@ -96,10 +96,10 @@
     <div class="form-actions">
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn btn-danger"
         :disabled="loading"
       >
-        {{ loading ? (isEdit ? 'Updating...' : 'Creating...') : (isEdit ? 'Update Signer' : 'Create Signer') }}
+        {{ loading ? (isEdit ? 'Updating...' : 'Creating...') : (isEdit ? 'Update' : 'Create') }}
       </button>
       <button
         type="button"
@@ -171,7 +171,7 @@ const validateForm = () => {
   if (!form.value.npwp) {
     newErrors.npwp = 'NPWP is required'
   } else if (!validateNPWP(form.value.npwp)) {
-    newErrors.npwp = 'NPWP must be 15 digits'
+    newErrors.npwp = 'NPWP harus 15 digit'
   }
   
   if (!form.value.statusTaxpayer) {

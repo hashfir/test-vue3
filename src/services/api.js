@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { mockSignersApi } from './mockApi'
 
 const API_BASE_URL = 'https://online-test-api.achilles.systems'
 
@@ -39,7 +38,6 @@ const realSignersApi = {
   deleteSigner: (id) => apiClient.delete(`/api/v1/signers/${id}`),
 }
 
-// Export the appropriate API based on configuration
-export const signersApi = USE_MOCK_API ? mockSignersApi : realSignersApi
+export const signersApi = realSignersApi
 
 export default apiClient

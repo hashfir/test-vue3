@@ -66,9 +66,13 @@
                 @click="deleteSigner(signer.id)"
                 class="btn btn-small btn-danger"
                 :disabled="deleting === signer.id"
+                title="Delete"
                 >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="vertical-align: middle; margin-right: 4px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 7h12M9 7V5a3 3 0 016 0v2m-7 0v12a2 2 0 002 2h4a2 2 0 002-2V7" />
+                </svg>
                 {{ deleting === signer.id ? 'Deleting...' : 'Delete' }}
-              </button>
+                </button>
             </td>
           </tr>
         </tbody>
@@ -239,6 +243,7 @@ onMounted(fetchSigners)
   border-radius: 12px;
   border: 1px solid #e2e8f0; */
   padding: 24px;
+  padding: 8px;
   margin-bottom: 24px;
 }
 
